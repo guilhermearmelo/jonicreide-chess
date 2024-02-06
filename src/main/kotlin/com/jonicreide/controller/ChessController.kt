@@ -16,7 +16,7 @@ class ChessController(
     @GetMapping("/analyse")
     fun getChessBoard(
         @RequestBody board: FEN
-    ) {
-        chessService.analyseBoard(board)
+    ) : Int{
+        return chessService.analyseBoard(board)
     }
 }

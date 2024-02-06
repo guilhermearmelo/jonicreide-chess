@@ -2,21 +2,23 @@ package com.jonicreide.service
 
 import com.jonicreide.domain.FEN
 import org.springframework.stereotype.Service
+import mu.KotlinLogging
 
 @Service
 class ChessService(
     private val boardService: BoardService
 ) {
-    var bitMaps = mutableMapOf<String, BooleanArray>()
+    private val logger = KotlinLogging.logger{}
 
-    fun analyseBoard(fen: FEN) {
+    fun analyseBoard(fen: FEN) : Int{
 
+        logger.info { "Validating FEN" }
         validateFEN(fen.fen)
-        boardService.fillBoard(fen.fen, bitMaps)
 
+        logger.info { "Evaluating Board" }
+        boardService.evaluateBoard(fen.fen)
 
-
-        println("Analyse board")
+        return 0
     }
 
     private fun validateFEN(fen: String) {

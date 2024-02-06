@@ -34,6 +34,8 @@ dependencies {
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	implementation ("io.github.microutils:kotlin-logging-jvm:2.0.11")
+
 }
 
 dependencyManagement {
