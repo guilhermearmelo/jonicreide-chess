@@ -6,7 +6,9 @@ import mu.KotlinLogging
 import org.springframework.stereotype.Service
 
 @Service
-class BoardService() {
+class BoardService(
+    private val evaluationService: EvaluationService
+) {
     private val logger = KotlinLogging.logger{}
     fun evaluateBoard(fen: String) : Int{
 
@@ -14,9 +16,10 @@ class BoardService() {
         var board = prepareBoardForEvaluation(fen)
         logger.info { "Board Information Completed" }
 
-        logger.info { "Material Evaluation" }
+        logger.info { "Simple Material Evaluation" }
+        val eval = evaluationService.simpleMaterialEvaluation(board)
 
-        return 0
+        return eval
     }
 
     private fun prepareBoardForEvaluation(fen: String) : Board {

@@ -16,14 +16,14 @@ class ChessService(
         validateFEN(fen.fen)
 
         logger.info { "Evaluating Board" }
-        boardService.evaluateBoard(fen.fen)
+        val eval = boardService.evaluateBoard(fen.fen)
 
-        return 0
+        return eval
     }
 
     private fun validateFEN(fen: String) {
         val regexPattern =
-            """\s*^(((?:[rnbqkpRNBQKP1-8]+\/){7})[rnbqkpRNBQKP1-8]+)\s([b|w])\s([K|Q|k|q]{1,4})\s(-|[a-h][1-8])\s(\d+\s\d+)${'$'}""".toRegex()
+            """\s*^(((?:[rnbqkpRNBQKP1-8]+\/){7})[rnbqkpRNBQKP1-8]+)\s([b|w])\s([K|Q|k|q|-]{1,4})\s(-|[a-h][1-8])\s(\d+\s\d+)${'$'}""".toRegex()
         if(!regexPattern.matches(fen)) throw Exception("Invalid FEN")
     }
 }
